@@ -58,8 +58,7 @@ export default class PickDate extends React.Component {
 
 selectDate(day){
   this.props.choosingDate(day)
-  // this.props.saveTransaction(day.timestamp)
-  console.log(day);
+
   Actions.pop()
 }
 

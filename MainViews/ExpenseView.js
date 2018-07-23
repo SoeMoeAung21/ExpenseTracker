@@ -88,9 +88,7 @@ export default class Expense extends React.Component {
 
     var percentLabel = (item.amount/this.state.monthlyExpense) * 100
     percentLabel = percentLabel.toFixed(2);
-    console.log('^^^^^^^^^^^^^^^^^^^^^^^^');
-    console.log(item);
-
+  
     return(
       <TouchableHighlight onPress={()=>this.detailView(item)} underlayColor='transparent'>
         <RenderListView  item={item} date={item.date} category={item.category} amount={item.amount} percent ={percentLabel + '%'} bigCard={item.bigCard}/>

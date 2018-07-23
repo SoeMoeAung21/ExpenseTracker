@@ -113,9 +113,6 @@ export default class AddTransaction extends React.Component {
     expense.note = this.state.noteText
     expense.type = this.state.categoryType
 
-    console.log(this.state.timestamp);
-
-
     AsyncStorage.setItem(expense.keyId, JSON.stringify(expense), () => {
       Alert.alert(
 

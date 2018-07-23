@@ -40,8 +40,7 @@ export default class OverAllView extends Component {
   componentDidMount(){
     this.receiveAllData()
     var date = new Date()
-    console.log(date.getFullYear());
-    console.log(date.getMonth());
+
   }
 
   swiperScrollEnd(e, state, context) {
@@ -146,14 +145,13 @@ export default class OverAllView extends Component {
             testBalance.push(monthlyIncome - monthlyExpense)
             testExp.push(monthlyExpense)
             testIncome.push(monthlyIncome)
-            console.log(monthlyExpense);
+
           }//end of for loop
 
           service.setState({
             oneYearData: tempEachYearData
           })
-          console.log('&&&&&&&&&&oneYearData&&&&&&&&&');
-          console.log(testExp);
+          
         })
 
       })

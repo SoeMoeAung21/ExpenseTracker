@@ -151,7 +151,6 @@ export default class ReportView extends React.Component {
       this.setState({
         data : this.state.annualBalance
       })
-      console.log(this.state.data);
     }else if(item.key === 2){
       this.setState({
         data : this.state.annualExpense
@@ -206,7 +205,7 @@ export default class ReportView extends React.Component {
             testBalance.push((monthlyIncome - monthlyExpense)/100000)
             testExp.push((monthlyExpense)/100000)
             testIncome.push((monthlyIncome)/100000)
-            console.log(monthlyExpense);
+
           }//end of for loop
 
           service.setState({
@@ -214,13 +213,6 @@ export default class ReportView extends React.Component {
             annualIncome: testIncome,
             annualExpense: testExp,
           })
-          console.log('&&&&&&&&&&oneYearData&&&&&&&&&');
-          console.log(testBalance);
-          console.log(testIncome);
-          console.log(testExp);
-          console.log(this.state.annualBalance);
-          console.log(this.state.annualIncome);
-          console.log(this.state.annualExpense);
           service.pressingLabel({key: 1})
 
         })
