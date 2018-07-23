@@ -5,6 +5,7 @@ incomeIcon : require('./Icons/income.png'),
 reportIcon : require('./Icons/report.png'),
 testDollarIcon : require('./Icons/tran.png'),
 backgroundImage1 : require('./Icons/background1.jpg'),
-backgroundImage2 : require('./Icons/background2.jpg')
+backgroundImage2 : require('./Icons/background2.jpg'),
+backgroundImage3 : require('./Icons/background3.jpg')
 }
 export default images

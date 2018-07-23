@@ -7,6 +7,7 @@ import SwiperView from '../Components/SwiperView';
 import RenderListView from '../Components/RenderListView';
 
 var MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+import Images from '../Theme/Images';
 
 
 import styles from './MainViewStyles/ExpenseViewStyle';
@@ -27,6 +28,8 @@ export default class Income extends React.Component {
       currentYear: date.getFullYear(),
       currentMonth: date.getMonth(),
       monthlyIncome: 0,
+      height: 80,
+      bigCardValue: false
     }
   }
 
@@ -47,6 +50,7 @@ export default class Income extends React.Component {
   render() {
     return (
       <View style={styles.expenseViewStyle}>
+        <Image style={styles.backgroundImageStyle} source={Images.backgroundImage3} resizeMode='cover'/>
         <View style={styles.yearViewStyle}>
           <TouchableHighlight onPress={()=>this.decrease1Year()} underlayColor='transparent'>
             <Text style={styles.yearFontStyle}> - </Text>
@@ -77,7 +81,7 @@ export default class Income extends React.Component {
   renderCarouselItem(item){
     return this.state.oneYearIncomeData.map((item)=> {
         return(
-          <SwiperView customColor= 'blue' balanceText='Total Income' balance={item.total} month={MONTHS[item.month - 1]} percent='50%'/>
+          <SwiperView customColor= '#258039' balanceText='Total Income' balance={item.total} month={MONTHS[item.month - 1]} percent='50%'/>
         )
     })
 
@@ -88,7 +92,9 @@ export default class Income extends React.Component {
     percentLabel = percentLabel.toFixed(2);
 
     return(
-      <RenderListView category={item.category} amount={item.amount} percent ={percentLabel + '%'}/>
+      <TouchableHighlight onPress={()=>this.detailView(item)} underlayColor='transparent'>
+        <RenderListView  item={item} date={item.date} category={item.category} amount={item.amount} percent ={percentLabel + '%'} bigCard={item.bigCard}/>
+      </TouchableHighlight>
 
     )
   }
@@ -115,8 +121,12 @@ export default class Income extends React.Component {
           for(tempMonthIndex=1; tempMonthIndex <= 12; tempMonthIndex++){
             var tempMonthlyIncomeData = [];
             var monthlyTotalIncome = 0
+            var keyId = 0
             tempOneYearIncomeData.map((item) => {
               if(item.month === tempMonthIndex && item.type === 'income'){
+                item.bigCard = false
+                item.keyId = keyId
+                keyId++;
                 tempMonthlyIncomeData.push(item)
                 monthlyTotalIncome = monthlyTotalIncome + parseInt(item.amount)
               }
@@ -143,6 +153,17 @@ export default class Income extends React.Component {
       })
   }
 
+
+  detailView(item){
+
+    this.setState({
+      bigCardValue: !this.state.bigCardValue
+    })
+
+    item.bigCard = this.state.bigCardValue
+
+
+  }
   decrease1Year(){
     this.setState({
       currentYear: this.state.currentYear - 1

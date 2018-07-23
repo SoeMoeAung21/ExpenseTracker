@@ -7,7 +7,7 @@ const styles = StyleSheet.create({
     padding: 5,
     marginTop: 5,
     marginBottom: 5,
-    backgroundColor: 'orange',
+    backgroundColor: '#F5BE41',
     borderRadius: 15,
     width: device.width - 40,
     alignSelf:'center',
@@ -38,6 +38,31 @@ const styles = StyleSheet.create({
     width: 100,
 
     marginLeft: device.width - 270
+  },
+  bigCardLabelViewStyle:{
+    flexDirection: 'row',
+  },
+  flatListItemStyle:{
+    padding: 5,
+    marginTop: 5,
+    marginBottom: 5,
+    backgroundColor: 'orange',
+    borderRadius: 15,
+    width: device.width - 40,
+    alignSelf:'center',
+    shadowOffset:{  width: 10,  height: 5},
+    shadowColor: '#555555',
+    shadowOpacity: 0.45,
+  },
+  categoryLabelStyle:{
+    fontFamily:'Cochin',
+    fontSize: 16,
+    fontWeight: 'bold',
+    marginLeft: 10,
+    marginBottom: 5
+  },
+  valueViewStyle:{
+    marginLeft: 30
   }
 });
 

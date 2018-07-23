@@ -91,7 +91,7 @@ export default class OverAllView extends Component {
   renderCarouselItem(item){
     return this.state.oneYearData.map((item)=> {
         return(
-          <SwiperView customColor= 'blue' balanceText='My Balance' balance={item.balance} month={MONTHS[item.month - 1]} percent='50%'/>
+          <SwiperView customColor= '#31A9B8' balanceText='My Balance' balance={item.balance} month={MONTHS[item.month - 1]} percent='50%'/>
         )
     })
   }

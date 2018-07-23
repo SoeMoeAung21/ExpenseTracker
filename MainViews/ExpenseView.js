@@ -28,6 +28,8 @@ export default class Expense extends React.Component {
       currentYear: date.getFullYear(),
       currentMonth: date.getMonth(),
       monthlyExpense: 0,
+      height: 80,
+      bigCardValue: false
     }
   }
 
@@ -41,7 +43,6 @@ export default class Expense extends React.Component {
       currentMonth : state.index,
       expenseData: this.state.oneYearExpenseData[state.index].monthlyData
     })
-
   }
 
   render() {
@@ -77,9 +78,8 @@ export default class Expense extends React.Component {
 
   renderCarouselItem(item){
     return this.state.oneYearExpenseData.map((item)=> {
-      console.log(item);
         return(
-          <SwiperView customColor= 'blue' balanceText='Total Expense' balance={item.total} month={MONTHS[item.month - 1]} percent='50%'/>
+          <SwiperView customColor= '#CF3721' balanceText='Total Expense' balance={item.total} month={MONTHS[item.month - 1]} percent='50%'/>
         )
     })
   }
@@ -88,10 +88,12 @@ export default class Expense extends React.Component {
 
     var percentLabel = (item.amount/this.state.monthlyExpense) * 100
     percentLabel = percentLabel.toFixed(2);
+    console.log('^^^^^^^^^^^^^^^^^^^^^^^^');
+    console.log(item);
 
     return(
-      <TouchableHighlight onPress={({item})=>this.detailView({item})} underlayColor='transparent'>
-        <RenderListView  category={item.category} amount={item.amount} percent ={percentLabel + '%'} />
+      <TouchableHighlight onPress={()=>this.detailView(item)} underlayColor='transparent'>
+        <RenderListView  item={item} date={item.date} category={item.category} amount={item.amount} percent ={percentLabel + '%'} bigCard={item.bigCard}/>
       </TouchableHighlight>
     )
   }
@@ -118,8 +120,12 @@ export default class Expense extends React.Component {
           for(tempMonthIndex=1; tempMonthIndex <= 12; tempMonthIndex++){
             var tempMonthlyExpenseData = [];
             var monthlyTotalExpense = 0
+            var keyId = 0
             tempOneYearExpenseData.map((item) => {
               if(item.month === tempMonthIndex && item.type === 'expense'){
+                item.bigCard = false
+                item.keyId = keyId
+                keyId++;
                 tempMonthlyExpenseData.push(item)
                 monthlyTotalExpense = monthlyTotalExpense + parseInt(item.amount)
               }
@@ -146,7 +152,26 @@ export default class Expense extends React.Component {
   }
 
   detailView(item){
-  
+
+    // var TempMonthlyToEdit = this.state.expenseData
+    // TempMonthlyToEdit.map((oneItem)=>{
+    //   if(oneItem.keyId === item.keyId){
+    //     oneItem.bigCard = true
+    //   }else{
+    //     oneItem.bigCard = false
+    //   }
+    // })
+    //
+    // this.setState({
+    //   expenseData : TempMonthlyToEdit
+    // })
+    this.setState({
+      bigCardValue: !this.state.bigCardValue
+    })
+
+    item.bigCard = this.state.bigCardValue
+
+
   }
 
   decrease1Year(){

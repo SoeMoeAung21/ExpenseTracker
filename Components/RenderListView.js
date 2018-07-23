@@ -17,8 +17,12 @@ export default class RenderListView extends React.Component {
     this.state={
       category : this.props.category,
       amount: this.props.amount,
-      percent: this.props.percent
-
+      percent: this.props.percent,
+      height : this.props.height,
+      subCategory: this.props.subCategory,
+      note: this.props.note,
+      date: this.props.date,
+      bigCard: this.props.bigCard
     }
   }
 
@@ -29,18 +33,40 @@ export default class RenderListView extends React.Component {
 
 
   render() {
-    return (
+    if (this.props.item.bigCard === false){
+      return (
 
-        <View style={styles.renderTableViewStyle}>
+          <View style={styles.renderTableViewStyle}>
+            <Text style={styles.categoryLabelStyle}>{this.state.category}</Text>
+            <View style={styles.secondView}>
+              <Text style={styles.percentLabelStyle}>{this.state.percent}</Text>
+              <Text style={styles.amountLabelStyle}>{this.state.amount}</Text>
+            </View>
+          </View>
+
+      );
+    }else{
+      return(
+        <View style={styles.flatListItemStyle}>
           <Text style={styles.categoryLabelStyle}>{this.state.category}</Text>
-          <View style={styles.secondView}>
-            <Text style={styles.percentLabelStyle}>{this.state.percent}</Text>
-            <Text style={styles.amountLabelStyle}>{this.state.amount}</Text>
+          <View style={styles.bigCardLabelViewStyle}>
+            <View>
+              <Text>Date :</Text>
+              <Text>Amount :</Text>
+              <Text>subCategory :</Text>
+              <Text>Note :</Text>
+            </View>
+            <View style={styles.valueViewStyle}>
+              <Text>{this.state.date}</Text>
+              <Text>{this.state.amount}</Text>
+              <Text>{this.state.subCategory ? this.state.subCategory : 'No Entered!'}</Text>
+              <Text>{this.state.note ? this.state.note : 'No Entered!'}</Text>
+          </View>
           </View>
         </View>
-
-    );
+      )
+    }
   }
 
-  
+
 }

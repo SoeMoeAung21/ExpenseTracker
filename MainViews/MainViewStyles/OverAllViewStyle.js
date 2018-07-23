@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
   renderCarouselItemStyle:{
     width: device.width - 60,
     height: (device.height * 0.25),
-    backgroundColor: 'blue',
+    backgroundColor: '#31A9B8',
     borderRadius: 10,
     shadowOffset:{  width: 10,  height: 10},
     shadowColor: '#555555',
@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
     opacity: 0.45
   },
   incomeViewStyle:{
-    backgroundColor: 'green',
+    backgroundColor: '#258039',
     width: (device.width / 2) - 15,
     height: (device.height * 0.45),
     alignItems: 'center',
@@ -75,7 +75,7 @@ const styles = StyleSheet.create({
     fontWeight:'bold',
   },
   expenseViewStyle:{
-    backgroundColor: 'red',
+    backgroundColor: '#CF3721',
     width: (device.width / 2) - 15,
     height: (device.height * 0.45),
     alignItems: 'center',
