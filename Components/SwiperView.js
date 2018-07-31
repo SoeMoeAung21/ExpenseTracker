@@ -9,7 +9,6 @@ const instructions = Platform.select({
 
 });
 
-
 export default class SwiperView extends React.Component {
 
   constructor(props){
@@ -26,8 +25,6 @@ export default class SwiperView extends React.Component {
   componentDidMount(){
 
   }
-
-
 
   render() {
     return (
