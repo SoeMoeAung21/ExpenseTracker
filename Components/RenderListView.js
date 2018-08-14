@@ -59,8 +59,8 @@ export default class RenderListView extends React.Component {
             <View style={styles.valueViewStyle}>
               <Text>{this.state.date}</Text>
               <Text>{this.state.amount}</Text>
-              <Text>{this.state.subCategory ? this.state.subCategory : 'No Entered!'}</Text>
-              <Text>{this.state.note ? this.state.note : 'No Entered!'}</Text>
+              <Text>{this.props.subCategory ? this.props.subCategory : 'No Entered!'}</Text>
+              <Text>{this.props.note ? this.props.note : 'No Entered!'}</Text>
           </View>
           </View>
         </View>

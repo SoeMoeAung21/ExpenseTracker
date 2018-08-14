@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
     height: 200,
     width: device.width - 50,
     alignSelf: 'center',
-    backgroundColor: 'red',
+    backgroundColor: 'white',
     borderRadius: 10,
     marginTop: 10,
     marginBottom: 10

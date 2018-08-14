@@ -42,9 +42,22 @@ export default class Income extends React.Component {
   swiperScrollEnd(e, state, context) {
     this.setState({
       currentMonth : state.index,
-      incomeData: this.state.oneYearIncomeData[state.index].monthlyData
+      incomeData: null,
+      monthRefreshing: true,
     })
+    var service = this
+    setTimeout(function(){
+      service.changeMonthlyData(state.index)
+    }, 0)
 
+  }
+
+  changeMonthlyData(index){
+    this.setState({
+      monthRefreshing: false,
+      incomeData: this.state.oneYearIncomeData[index].monthlyData,
+      monthlyIncome: this.state.oneYearIncomeData[index].total
+    })
   }
 
   render() {
@@ -67,21 +80,39 @@ export default class Income extends React.Component {
         </Swiper>
         </View>
         <View style={styles.flatListContainer}>
-          <FlatList style={styles.flatListStyle} contentContainerStyle={styles.flatListContentStyle}
-            data={this.state.incomeData}
-            renderItem={({item})=>this.renderListItem(item)}
-            keyExtractor={(item, index) => index}
-            horizonal={true}
-          />
+          {this.state.monthRefreshing ? this.renderLoading() : this.renderFlatListView()}
+
         </View>
       </View>
     );
   }
+  
+  renderLoading(){
+    return(
+      <View>
+      </View>
+    )
+  }
 
-  renderCarouselItem(item){
+  renderFlatListView(){
+    return(
+      <FlatList style={styles.flatListStyle} contentContainerStyle={styles.flatListContentStyle}
+        data={this.state.incomeData}
+        renderItem={({item})=>this.renderListItem(item)}
+        keyExtractor={(item, index) => index}
+        horizonal={true}
+        extraData={this.state}
+      />
+    )
+  }
+
+  renderCarouselItem(){
+
+
     return this.state.oneYearIncomeData.map((item)=> {
+
         return(
-          <SwiperView customColor= '#258039' balanceText='Total Income' balance={item.total} month={MONTHS[item.month - 1]} percent='50%'/>
+          <SwiperView customColor= '#258039' balanceText='Total Income' balance={item.total} month={MONTHS[item.month - 1]} percent=''/>
         )
     })
 
@@ -90,6 +121,7 @@ export default class Income extends React.Component {
   renderListItem(item){
     var percentLabel = (item.amount/this.state.monthlyIncome) * 100
     percentLabel = percentLabel.toFixed(2);
+
 
     return(
       <TouchableHighlight onPress={()=>this.detailView(item)} underlayColor='transparent'>
@@ -147,7 +179,6 @@ export default class Income extends React.Component {
             monthlyIncome : tempTotalSavedItem[this.state.currentMonth].total,
             oneYearIncomeData : tempTotalSavedItem
           })
-
 
         })
       })

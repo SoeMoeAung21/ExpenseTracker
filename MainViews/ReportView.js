@@ -49,6 +49,15 @@ export default class ReportView extends React.Component {
 
     return (
         <View style={styles.mainContainerStyle}>
+          <View style={styles.yearViewStyle}>
+            <TouchableHighlight onPress={()=>this.decrease1Year()} underlayColor='transparent'>
+              <Text style={styles.yearFontStyle}> - </Text>
+            </TouchableHighlight>
+              <Text style={styles.yearFontStyle}>{this.state.currentYear}</Text>
+            <TouchableHighlight onPress={()=>this.increase1Year()} underlayColor='transparent'>
+              <Text style={styles.yearFontStyle}> + </Text>
+            </TouchableHighlight>
+          </View>
           <View style={styles.labelViewStyle}>
             {this.pickLabel()}
           </View>
@@ -218,6 +227,20 @@ export default class ReportView extends React.Component {
         })
 
       })
+  }
+
+  decrease1Year(){
+    this.setState({
+      currentYear: this.state.currentYear - 1
+    })
+    this.receiveAllData()
+  }
+
+  increase1Year(){
+    this.setState({
+      currentYear: this.state.currentYear + 1
+    })
+    this.receiveAllData()
   }
 
 }//End of Class

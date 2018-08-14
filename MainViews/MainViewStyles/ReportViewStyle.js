@@ -18,6 +18,19 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontFamily: 'Cochin'
   },
+  yearViewStyle:{
+    marginTop: 5,
+    flexDirection: 'row',
+    justifyContent:'center',
+  },
+  yearFontStyle:{
+    fontSize: 20,
+    fontFamily: 'Cochin',
+    fontWeight: 'bold',
+    shadowOffset:{  width: 10,  height: 5},
+    shadowColor: '#555555',
+    shadowOpacity: 0.45,
+  },
   barChartViewStyle:{
     padding: 10
   },

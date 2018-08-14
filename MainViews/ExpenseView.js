@@ -29,7 +29,8 @@ export default class Expense extends React.Component {
       currentMonth: date.getMonth(),
       monthlyExpense: 0,
       height: 80,
-      bigCardValue: false
+      bigCardValue: false,
+      monthRefreshing: false
     }
   }
 
@@ -41,7 +42,21 @@ export default class Expense extends React.Component {
   swiperScrollEnd(e, state, context) {
     this.setState({
       currentMonth : state.index,
-      expenseData: this.state.oneYearExpenseData[state.index].monthlyData
+      expenseData: null,
+      monthRefreshing: true,
+    })
+    var service = this
+    setTimeout(function(){
+      service.changeMonthlyData(state.index)
+    }, 0)
+
+  }
+
+  changeMonthlyData(index){
+    this.setState({
+      monthRefreshing: false,
+      expenseData: this.state.oneYearExpenseData[index].monthlyData,
+      monthlyExpense: this.state.oneYearExpenseData[index].total
     })
   }
 
@@ -65,15 +80,29 @@ export default class Expense extends React.Component {
           </Swiper>
         </View>
         <View style={styles.flatListContainer}>
-          <FlatList style={styles.flatListStyle} contentContainerStyle={styles.flatListContentStyle}
-            data={this.state.expenseData}
-            renderItem={({item})=>this.renderListItem(item)}
-            keyExtractor={(item, index) => index}
-            horizonal={true}
-          />
+          {this.state.monthRefreshing ? this.renderLoading() : this.renderFlatListView()}
         </View>
       </View>
     );
+  }
+
+  renderLoading(){
+    return(
+      <View>
+      </View>
+    )
+  }
+
+  renderFlatListView(){
+    return(
+      <FlatList style={styles.flatListStyle} contentContainerStyle={styles.flatListContentStyle}
+        data={this.state.expenseData}
+        renderItem={({item})=>this.renderListItem(item)}
+        keyExtractor={(item, index) => index}
+        horizonal={true}
+        extraData={this.state}
+      />
+    )
   }
 
   renderCarouselItem(item){
@@ -88,10 +117,10 @@ export default class Expense extends React.Component {
 
     var percentLabel = (item.amount/this.state.monthlyExpense) * 100
     percentLabel = percentLabel.toFixed(2);
-  
+
     return(
       <TouchableHighlight onPress={()=>this.detailView(item)} underlayColor='transparent'>
-        <RenderListView  item={item} date={item.date} category={item.category} amount={item.amount} percent ={percentLabel + '%'} bigCard={item.bigCard}/>
+        <RenderListView  item={item} date={item.date} category={item.category} amount={item.amount} subCategory={item.subCategory} note={item.note} percent ={percentLabel +'%'} bigCard={item.bigCard}/>
       </TouchableHighlight>
     )
   }
