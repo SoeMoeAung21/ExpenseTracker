@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Platform, StyleSheet, Text, TextInput, View, FlatList, ScorllView, Image, TouchableHighlight, KeyboardAvoidingView, AsyncStorage, Alert } from 'react-native';
+import { Platform, StyleSheet, Text, TextInput, View, FlatList, ScorllView, Image, TouchableHighlight, KeyboardAvoidingView, AsyncStorage, Alert, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import { Actions, Router, Scene } from 'react-native-router-flux';
 
 
@@ -31,6 +31,7 @@ export default class AddTransaction extends React.Component {
 
   render() {
     return (
+      <TouchableWithoutFeedback onPress={() => {Keyboard.dismiss()}}>
         <View style={styles.allViewStyle} >
         <Image source={Images.backgroundImage} style={styles.backgroundImageStyle}/>
           <View style={styles.firstContainerStyle}>
@@ -43,6 +44,7 @@ export default class AddTransaction extends React.Component {
             <View style={styles.amountViewStyle}>
               <Text style={styles.dateLabelStyle}>Amount</Text>
               <TextInput style={styles.selectedDateStyle}
+              keyboardShouldPersistTaps={'never'}
                 onChangeText={(amount) => this.setState({amount})}
                 value={this.state.amount}
                 keyboardType='numeric'
@@ -80,6 +82,7 @@ export default class AddTransaction extends React.Component {
               />
             </View>
         </View>
+        </TouchableWithoutFeedback>
     );
   }
 

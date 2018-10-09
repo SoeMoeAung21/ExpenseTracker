@@ -27,9 +27,6 @@ export default class RenderListView extends React.Component {
   }
 
   componentDidMount(){
-    console.log("*************");
-    console.log(this.props);
-    console.log("************");
   }
 
 
