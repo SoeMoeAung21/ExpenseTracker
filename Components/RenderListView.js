@@ -19,15 +19,17 @@ export default class RenderListView extends React.Component {
       amount: this.props.amount,
       percent: this.props.percent,
       height : this.props.height,
-      subCategory: this.props.subCategory,
-      note: this.props.note,
+      subCategory: this.props.item.subCategory,
+      note: this.props.item.note,
       date: this.props.date,
       bigCard: this.props.bigCard
     }
   }
 
   componentDidMount(){
-
+    console.log("*************");
+    console.log(this.props);
+    console.log("************");
   }
 
 
@@ -57,10 +59,10 @@ export default class RenderListView extends React.Component {
               <Text>Note :</Text>
             </View>
             <View style={styles.valueViewStyle}>
-              <Text>{this.state.date}</Text>
+              <Text>{this.state.date ? this.state.date : 'No date' }</Text>
               <Text>{this.state.amount}</Text>
-              <Text>{this.props.subCategory ? this.props.subCategory : 'No Entered!'}</Text>
-              <Text>{this.props.note ? this.props.note : 'No Entered!'}</Text>
+              <Text>{this.state.subCategory ? this.state.subCategory : 'No Data!'}</Text>
+              <Text>{this.state.note ? this.state.note : 'No Data!'}</Text>
           </View>
           </View>
         </View>
